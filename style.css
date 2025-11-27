@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;   
+    box-sizing: border-box;
 }
 
 body{
@@ -23,7 +24,7 @@ body{
 
 input{
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     margin: 10px 0;
     border: none;
     background-color: #333;
@@ -33,10 +34,11 @@ input{
     height:  20px;
 }
 small{
+    width: 100%;
     background-color: #333;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
-    height:  20px;
+    height:  40px;
 }
 input:focus{
     background-color: #444;
@@ -48,7 +50,7 @@ button{
     padding: 10px;
     margin: 10px 0;
     border: none;
-    background-color: #333;
+    background-color: #e100f1;
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -57,6 +59,8 @@ button{
 
 button:hover{
     background-color: #444;
+    scale: 1.03;
+    letter-spacing: 1px;
 }
 
 #total{
@@ -71,4 +75,35 @@ button:hover{
     justify-items: center;
     align-items: center;
 
+}
+/* end inputs */
+
+.btnSearch{
+    display: flex;
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+}
+
+/* table */
+table{
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+table, th, td{
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+}
+td button{
+    background-color: transparent;
+}
+.fa-pen{
+    cursor: pointer;
+}
+.fa-trash{
+    color: rgba(255, 17, 0, 0.822);
+    cursor: pointer;
 }
