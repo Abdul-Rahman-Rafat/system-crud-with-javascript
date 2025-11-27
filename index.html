@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CRUD S </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="crud">
+        <div class="head">
+            <h1>CRUD</h1>
+            <p>Create, Read, Update, Delete</p>
+        </div>
+
+        <div class="inputs">
+            <input type="text" id="title" placeholder="title">
+            <div class="price">
+                <input type="number" id="price" placeholder="price">
+                <input type="number" id="taxes" placeholder="taxes">
+                <input type="number" id="ads" placeholder="ads">
+                <input type="number" id="discount" placeholder="discount">
+                
+                <small id="total">0$</small>
+            </div>
+            <input type="number" id="count" placeholder="count">
+            <input type="text" id="category" placeholder="category">
+            <button id="submit">Create</button>
+        </div>
+        <div class="outputs"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
