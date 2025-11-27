@@ -69,6 +69,13 @@ button:hover{
     border-radius: 5px;
 }
 
+#total::before{
+    content: 'total: ';
+}
+#total::after{
+    content: '$';
+}
+
 .price{
     display: flex;
     gap: 10px;
