@@ -11,6 +11,8 @@ let count = document.getElementById("count");
 let category = document.getElementById("category");
 let submit = document.getElementById("submit");
 
+let del_all=document.getElementById("deleteAll")
+
 let tbody = document.getElementById("tbody");
 
 // let search = document.getElementById("search");
@@ -87,13 +89,26 @@ function showData(){
         `
         tbody.appendChild(newTr)
     }
-
+if(tbody.innerHTML){
+del_all.style.display="block";
+del_all.onclick=delete_all;
+}
+else{
+del_all.style.display="none";
+}
 }
 
 showData();
 
 function deleteData(i){
 datapro.splice(i,1);
-localStorage.product=JSON.stringify(datapro);
+localStorage.setItem('product',JSON.stringify(datapro))
+
 showData();
+}
+
+function delete_all(){
+    localStorage.clear();
+    datapro.splice(0)
+    showData();
 }
