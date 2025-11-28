@@ -15,6 +15,10 @@ let del_all=document.getElementById("deleteAll")
 
 let tbody = document.getElementById("tbody");
 
+let mode = 'create';
+let tmp ;
+
+
 // let search = document.getElementById("search");
 // let searchTitle = document.getElementById("searchTitle");
 // let searchCategory = document.getElementById("searchCategory");
@@ -38,7 +42,7 @@ let datapro= JSON.parse(localStorage.getItem('product'))||[];
 submit.onclick=()=>{
 
     let newObj= {
-        titel:title.value,
+        title:title.value,
         price:price.value,
         taxes:taxes.value,
         ads:ads.value,
@@ -51,7 +55,7 @@ submit.onclick=()=>{
     }
 
 
-
+if(mode === 'create'){
 if(newObj.count>1){
     for(let i=0 ; i<newObj.count;i++){
         datapro.push(newObj);
@@ -60,7 +64,13 @@ if(newObj.count>1){
 else{
     datapro.push(newObj);
 }
-
+}
+else{
+    datapro[tmp]=newObj;
+    mode="create";
+    submit.textContent="Create";
+    count.style.display="block"
+}
 
 
 
@@ -91,14 +101,14 @@ function showData(){
         let newTr = document.createElement("tr")
         newTr.innerHTML = `
         <td>${i+1} </td>
-        <td>${datapro[i].titel}</td>
+        <td>${datapro[i].title}</td>
         <td>${datapro[i].price}</td>
         <td>${datapro[i].taxes}</td>
         <td>${datapro[i].ads}</td>
         <td>${datapro[i].discount}</td>
     
         <td>${datapro[i].category}</td>
-        <td><i id="update"  class="fa-solid fa-pen"></i></td>
+        <td><i id="update" onclick="updateData(${i})" class="fa-solid fa-pen"></i></td>
         <td><i id="delete" onclick="deleteData(${i})" class="fa-solid fa-trash"></i></td>
         `
         tbody.appendChild(newTr)
@@ -126,4 +136,25 @@ function delete_all(){
     localStorage.clear();
     datapro.splice(0)
     showData();
+}
+
+function updateData(i){
+    
+    title.value = datapro[i].title ;
+    price.value = datapro[i].price ;
+    taxes.value = datapro[i].taxes ;
+    ads.value = datapro[i].ads ;
+    discount.value = datapro[i].discount ;
+    category.value = datapro[i].category ;
+    getTotal();
+    count.style.display="none";
+    submit.textContent='Update';
+    mode = "update";
+    tmp=i;
+    showData();
+
+    window.scroll({
+        top:0,
+        behavior:'smooth'
+    });
 }
