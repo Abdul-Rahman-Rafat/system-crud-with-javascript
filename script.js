@@ -5,7 +5,6 @@ let ads = document.getElementById("ads");
 let discount = document.getElementById("discount");
 let total = document.getElementById("total");
 
-// --------
 
 let count = document.getElementById("count");
 let category = document.getElementById("category");
@@ -19,9 +18,12 @@ let mode = 'create';
 let tmp ;
 
 
-// let search = document.getElementById("search");
-// let searchTitle = document.getElementById("searchTitle");
-// let searchCategory = document.getElementById("searchCategory");
+let search = document.getElementById("search");
+let searchTitle = document.getElementById("searchTitle");
+let searchCategory = document.getElementById("searchCategory");
+
+
+
 function getTotal(){
 
     if(price.value !=''){
@@ -42,41 +44,46 @@ let datapro= JSON.parse(localStorage.getItem('product'))||[];
 submit.onclick=()=>{
 
     let newObj= {
-        title:title.value,
+        title:title.value.toLowerCase(),
         price:price.value,
         taxes:taxes.value,
         ads:ads.value,
         discount:discount.value,
-        category:category.value,
+        category:category.value.toLowerCase(),
 
         total:total.innerHTML,
         count:count.value
 
     }
 
+if(title.value!=''&&
+   category.value!=''&&
+   price.value!=''&&
+    count.value<100){
 
-if(mode === 'create'){
-if(newObj.count>1){
-    for(let i=0 ; i<newObj.count;i++){
-        datapro.push(newObj);
-    }
-}
-else{
-    datapro.push(newObj);
-}
-}
-else{
-    datapro[tmp]=newObj;
-    mode="create";
-    submit.textContent="Create";
-    count.style.display="block"
-}
+       if(mode === 'create'){
+       if(newObj.count>1){
+           for(let i=0 ; i<newObj.count;i++){
+               datapro.push(newObj);
+           }
+       }
+       else{
+           datapro.push(newObj);
+       }
+       }
+       else{
+           datapro[tmp]=newObj;
+           mode="create";
+           submit.textContent="Create";
+           count.style.display="block"
+       }
+       clearData();
+   }
 
 
 
 // console.log(datapro)
 localStorage.setItem('product',JSON.stringify(datapro))
-clearData();
 showData()
 }
 
@@ -93,12 +100,8 @@ function clearData(){
     category.value = '';
 
 }
-
-function showData(){
-  
-    tbody.innerHTML = '';
-    for(let i=0; i<datapro.length; i++){
-        let newTr = document.createElement("tr")
+function createRow(i){
+ let newTr = document.createElement("tr")
         newTr.innerHTML = `
         <td>${i+1} </td>
         <td>${datapro[i].title}</td>
@@ -112,6 +115,13 @@ function showData(){
         <td><i id="delete" onclick="deleteData(${i})" class="fa-solid fa-trash"></i></td>
         `
         tbody.appendChild(newTr)
+}
+function showData(){
+  
+    tbody.innerHTML = '';
+    for(let i=0; i<datapro.length; i++){
+
+        createRow(i);
     }
 if(tbody.innerHTML){
 del_all.style.display="block";
@@ -122,9 +132,7 @@ else{
 del_all.style.display="none";
 }
 }
-
 showData();
-
 function deleteData(i){
 datapro.splice(i,1);
 localStorage.setItem('product',JSON.stringify(datapro))
@@ -157,4 +165,38 @@ function updateData(i){
         top:0,
         behavior:'smooth'
     });
+}
+
+let searchMode='title';
+function getSearchMode(id){
+    if(id=='searchTitle'){
+        searchMode='title';
+        
+    }
+    else{
+        searchMode='category';
+    }
+    search.placeholder='Search by '+searchMode;
+    search.focus();
+    search.value='';
+    showData();
+    
+}
+function searchData(search_value)
+{
+    tbody.innerHTML='';
+    for(let i=0;i<datapro.length;i++){
+        // title
+        if(searchMode=='title'){
+            if( datapro[i].title.includes(search_value.toLowerCase())){
+            createRow(i);
+            }
+        }
+        // category
+        else{
+            if( datapro[i].category.includes(search_value.toLowerCase())){
+            createRow(i);
+            }
+        }
+    }
 }
