@@ -49,7 +49,21 @@ submit.onclick=()=>{
         count:count.value
 
     }
-datapro.push(newObj)
+
+
+
+if(newObj.count>1){
+    for(let i=0 ; i<newObj.count;i++){
+        datapro.push(newObj);
+    }
+}
+else{
+    datapro.push(newObj);
+}
+
+
+
+
 // console.log(datapro)
 localStorage.setItem('product',JSON.stringify(datapro))
 clearData();
@@ -91,6 +105,7 @@ function showData(){
     }
 if(tbody.innerHTML){
 del_all.style.display="block";
+del_all.textContent=`Delete All (${datapro.length})`
 del_all.onclick=delete_all;
 }
 else{
