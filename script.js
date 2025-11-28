@@ -11,7 +11,8 @@ let count = document.getElementById("count");
 let category = document.getElementById("category");
 let submit = document.getElementById("submit");
 
-// let tbody = document.getElementById("tbody");
+let tbody = document.getElementById("tbody");
+
 // let search = document.getElementById("search");
 // let searchTitle = document.getElementById("searchTitle");
 // let searchCategory = document.getElementById("searchCategory");
@@ -40,16 +41,17 @@ submit.onclick=()=>{
         taxes:taxes.value,
         ads:ads.value,
         discount:discount.value,
+        category:category.value,
 
         total:total.innerHTML,
-        count:count.value,
-        category:category.value
+        count:count.value
 
     }
 datapro.push(newObj)
 // console.log(datapro)
 localStorage.setItem('product',JSON.stringify(datapro))
 clearData();
+showData()
 }
 
 
@@ -63,5 +65,35 @@ function clearData(){
     total.style.background='#e100f1'
     count.value = '';
     category.value = '';
+
+}
+
+function showData(){
+  
+    tbody.innerHTML = '';
+    for(let i=0; i<datapro.length; i++){
+        let newTr = document.createElement("tr")
+        newTr.innerHTML = `
+        <td>${i+1} </td>
+        <td>${datapro[i].titel}</td>
+        <td>${datapro[i].price}</td>
+        <td>${datapro[i].taxes}</td>
+        <td>${datapro[i].ads}</td>
+        <td>${datapro[i].discount}</td>
+    
+        <td>${datapro[i].category}</td>
+        <td><i id="update"  class="fa-solid fa-pen"></i></td>
+        <td><i id="delete" onclick="deleteData(${i})" class="fa-solid fa-trash"></i></td>
+        `
+        tbody.appendChild(newTr)
+    }
+
+}
+
+showData();
+
+function deleteData(i){
+console.log(i)
+
 
 }
