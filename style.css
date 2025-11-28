@@ -57,7 +57,7 @@ button{
     transition: all 0.3s ease-in-out;
 }
 
-button:hover{
+button:hover {
     background-color: #444;
     scale: 1.03;
     letter-spacing: 1px;
@@ -109,8 +109,55 @@ td button{
 }
 .fa-pen{
     cursor: pointer;
+     
 }
+
 .fa-trash{
     color: rgba(255, 17, 0, 0.822);
+    transition: all 0.3s ;
     cursor: pointer;
+}
+.fa-pen:hover{
+    scale: 1.2;
+    animation: tilt 0.4s ease-in-out;
+}
+
+@keyframes tilt {
+    0%{
+        rotate: 0deg;
+    }
+    25%{
+        rotate: -15deg;
+    }
+    50%{
+        rotate: 15deg;
+    }
+    75%{
+        rotate: -15deg;
+    }
+    100%{
+        rotate: 0deg;
+    }
+}
+.fa-trash:hover{
+    scale: 1.2;
+    animation : hesitate 0.4s ease-in-out;
+}
+
+@keyframes hesitate {
+    0%{
+        rotate: 0deg;
+    }
+    25%{
+        rotate: 15deg;
+    }
+    50%{
+        rotate: -15deg;
+    }
+    75%{
+        rotate: 15deg;
+    }
+    100%{
+        rotate: 0deg;
+    }
 }
