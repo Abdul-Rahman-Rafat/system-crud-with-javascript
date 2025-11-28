@@ -93,7 +93,7 @@ function showData(){
 showData();
 
 function deleteData(i){
-console.log(i)
-
-
+datapro.splice(i,1);
+localStorage.product=JSON.stringify(datapro);
+showData();
 }
