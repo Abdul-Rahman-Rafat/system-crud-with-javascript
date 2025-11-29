@@ -15,7 +15,7 @@ let del_all=document.getElementById("deleteAll")
 let tbody = document.getElementById("tbody");
 
 let mode = 'create';
-let tmp ;
+let tmp ; // to access index of items
 
 
 let search = document.getElementById("search");
@@ -38,7 +38,7 @@ function getTotal(){
 }
 
 // let datapro=[];  //X
-let datapro= JSON.parse(localStorage.getItem('product'))||[];
+let datapro= JSON.parse(localStorage.getItem('product'))||[]; // get store data if it exists from localStorage
 
 
 submit.onclick=()=>{
@@ -61,7 +61,7 @@ if(title.value!=''&&
    price.value!=''&&
     count.value<100){
 
-       if(mode === 'create'){
+       if(mode === 'create'){//create
        if(newObj.count>1){
            for(let i=0 ; i<newObj.count;i++){
                datapro.push(newObj);
@@ -71,10 +71,10 @@ if(title.value!=''&&
            datapro.push(newObj);
        }
        }
-       else{
+       else{ //update
            datapro[tmp]=newObj;
-           mode="create";
-           submit.textContent="Create";
+           mode="create"; //after update return to create
+           submit.textContent="Create"; //after update return to create
            count.style.display="block"
        }
        clearData();
@@ -158,7 +158,7 @@ function updateData(i){
     count.style.display="none";
     submit.textContent='Update';
     mode = "update";
-    tmp=i;
+    tmp=i; //to access the selected item 
     showData();
 
     window.scroll({
